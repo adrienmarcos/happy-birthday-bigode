@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import confetti from "canvas-confetti";
 import clapsAudio from "../assets/claps.mp3";
+import levelupAudio from "../assets/levelup.mp3";
 import rodrigoFone from "../assets/rodrigo-fone.jpeg";
 import rodrigoNuvens from "../assets/rodrigo-nuvens.jpeg";
 
@@ -41,6 +42,8 @@ const triggerConfetti = () => {
 };
 
 const openGift = () => {
+  const levelup = new Audio(levelupAudio);
+  levelup.play();
   emit("play-audio");
   showGift.value = true;
 };

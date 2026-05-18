@@ -109,6 +109,16 @@ onMounted(() => {
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 90vw;
+}
+
+@media (max-width: 600px) {
+  .start-button {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+  }
 }
 
 .start-button:hover {

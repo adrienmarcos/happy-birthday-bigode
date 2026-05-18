@@ -1,11 +1,14 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import confetti from "canvas-confetti";
+import clapsAudio from "../assets/claps.mp3";
 
 const emit = defineEmits(["play-audio"]);
 
 const is8Bit = ref(false);
 const showGift = ref(false);
+
+let audio = null;
 
 const triggerConfetti = () => {
   const duration = 3 * 1000;
@@ -44,6 +47,16 @@ onMounted(() => {
   // Disparar confetes
   triggerConfetti();
 
+  // Play audio
+  audio = new Audio(clapsAudio);
+  audio.play();
+  setTimeout(() => {
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, 7000);
+
   // Easter Egg no Console
   console.log(
     "%c[AILOG-SYS] %cAcesso root concedido ao aniversariante. %cFeliz aniversário, Rodrigo!",
@@ -51,6 +64,14 @@ onMounted(() => {
     "color: #ffffff;",
     "color: #2ecc71; font-style: italic;",
   );
+});
+
+onUnmounted(() => {
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+    audio = null;
+  }
 });
 </script>
 

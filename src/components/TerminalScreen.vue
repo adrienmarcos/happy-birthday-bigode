@@ -8,12 +8,19 @@ const lines = [
   "> Carregando dependências do Spring Boot...",
   "> Mapeando rotas de frotas da AILOG... [Sucesso]",
   "> Compilando pacote de aniversário do Rodrigo...",
-  "> Enviando arquivos para o servidor... [Ambiente de Desenvolvimento offline]",
+  "> Enviando arquivos para o servidor dev... [Offline]",
   "> Subindo alterações direto na produção... [Acesso root concedido]",
   "> Deploy realizado com sucesso. Status Code: 200 OK!",
 ];
 
 const displayedLines = ref([]);
+
+const isStarted = ref(false);
+
+const handleStart = () => {
+  isStarted.value = true;
+  startBootSequence();
+};
 
 const typeLine = (line, index, callback) => {
   let charIndex = 0;
@@ -48,13 +55,18 @@ const startBootSequence = async () => {
 };
 
 onMounted(() => {
-  startBootSequence();
+  // Wait for user interaction
 });
 </script>
 
 <template>
   <div class="terminal-screen">
-    <div class="terminal-content font-mono q-pa-md">
+    <div v-if="!isStarted" class="start-container">
+      <button @click="handleStart" class="start-button">
+        ▶ Run SpringApplication.run(RodrigoApp.class)
+      </button>
+    </div>
+    <div v-else class="terminal-content font-mono q-pa-md">
       <div
         v-for="(line, index) in displayedLines"
         :key="index"
@@ -79,6 +91,28 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   z-index: 9999;
+}
+
+.start-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-button {
+  background: transparent;
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+  padding: 1rem 2rem;
+  font-family: monospace;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.start-button:hover {
+  background: #2ecc71;
+  color: #000;
 }
 
 .terminal-content {

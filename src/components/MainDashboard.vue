@@ -2,6 +2,8 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import confetti from "canvas-confetti";
 import clapsAudio from "../assets/claps.mp3";
+import rodrigoFone from "../assets/rodrigo-fone.jpeg";
+import rodrigoNuvens from "../assets/rodrigo-nuvens.jpeg";
 
 const emit = defineEmits(["play-audio"]);
 
@@ -85,7 +87,7 @@ onUnmounted(() => {
           class="avatar-neon"
           :class="{ 'pixelated-mode': is8Bit }"
         >
-          <img src="/src/assets/rodrigo-fone.jpeg" alt="Rodrigo de Fone" />
+          <img :src="rodrigoFone" alt="Rodrigo de Fone" />
         </q-avatar>
         <h1 class="text-h3 text-bold q-mt-md text-primary title-glow">
           Feliz Aniversário,<br />
@@ -139,7 +141,7 @@ onUnmounted(() => {
         class="bg-dark text-white glass-card"
         style="width: 400px; max-width: 90vw"
       >
-        <q-img src="/src/assets/rodrigo-nuvens.jpeg">
+        <q-img :src="rodrigoNuvens">
           <div
             class="absolute-bottom text-subtitle1 text-center bg-black-opacity"
           >

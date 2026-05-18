@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import typingAudioFile from "../assets/keyboard-typing.mp3";
 
 const emit = defineEmits(["finished"]);
 
@@ -24,7 +25,7 @@ const handleStart = () => {
 
 const typeLine = (line, index, callback) => {
   let charIndex = 0;
-  const typingAudio = new Audio("/src/assets/keyboard-typing.mp3");
+  const typingAudio = new Audio(typingAudioFile);
   typingAudio.loop = true;
   typingAudio.play().catch((e) => console.warn("Audio play blocked:", e));
 
